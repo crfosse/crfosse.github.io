@@ -22,7 +22,7 @@ function myFunction() {
         })
 
         .then(function(service){
-            return service.getCharacteristic(0x6e40002)
+            return service.getCharacteristic(0x6e400002)
         })
         .then(function(characteristic){
             var data = 'HEI:';
