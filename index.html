@@ -12,17 +12,21 @@ function connect() {
         filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}]
     })
         .then(function(device) {
+            alert("Connecting...")
             return device.gatt.connect();
         })
 
         .then(function(server) {
+            alert("Server")
             return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
         })
 
         .then(function(service){
+            alert("Service")
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
+            alert("Write")
             var data = 'HEI:';
             return characteristic.writeValue(data);
         })
