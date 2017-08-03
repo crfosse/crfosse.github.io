@@ -28,7 +28,7 @@ function connect() {
         .then(function(characteristic){
             var data = new Uint8Array([0x41, 0xA3]);
             alert(characteristic.writeValue(data));
-            return characteristic.writeValue(data);
+            return null//characteristic.writeValue(data);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
