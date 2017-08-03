@@ -23,7 +23,7 @@ function connect() {
 
         .then(function(service){
             alert("Service")
-            return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
+            return service.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
             alert("Write")
@@ -32,7 +32,7 @@ function connect() {
             view[0] = 0x41;
             view[1] = 0x3A;*/
             var data = new Uint8Array([0xbb, 0x25, 0x05, 0x44]);
-            alert(characteristic.writeValue(data));
+            //alert(characteristic.writeValue(data));
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
