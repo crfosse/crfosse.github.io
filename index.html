@@ -9,7 +9,7 @@ Hello World
 //Scanning for device with micro:bit - service
 function connect() {
     navigator.bluetooth.requestDevice({
-        filters: [{services: [0x0201061609424243206D6963726F3A626974205B76617A61705D]}]
+        filters: [{services: [0x6e400001b5a3f393e0a9e50e24dcca9e]}]
     })
         .then(function(device) {
             return device.gatt.connect();
