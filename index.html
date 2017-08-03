@@ -9,18 +9,18 @@ Hello World
 //Scanning for device with micro:bit - service
 function connect() {
     navigator.bluetooth.requestDevice({
-        filters: [{services: [0x6e400001b5a3f393e0a9e50e24dcca9e]}]
+        filters: [{services: [0xe9accd42e05e9a0e393f3a5b100004e6]}]
     })
         .then(function(device) {
             return device.gatt.connect();
         })
 
         .then(function(server) {
-            return server.getPrimaryService(0x0001)
+            return server.getPrimaryService(0x1000)
         })
 
         .then(function(service){
-            return service.getCharacteristic(0x0003)
+            return service.getCharacteristic(0x3000)
         })
         .then(function(characteristic){
             var data = 'HEI:';
