@@ -8,6 +8,8 @@ Hello World
 <script>
 //Scanning for device with micro:bit - service
 function myFunction() {
+    alert("BLE")
+
     navigator.bluetooth.requestDevice({
         filters: [{services: [0x6e400001]}]
     })
