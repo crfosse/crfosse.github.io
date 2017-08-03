@@ -1,28 +1,33 @@
+<body onload="myFunction()">
+
 Hello World
 <button id="btn">Press dis.</button>
 
+</body>
 
 <script>
 //Scanning for device with micro:bit - service
-navigator.bluetooth.requestDevice({
-    filters: [{services: [0x6e400001]}]
-})
-    .then(function(device) {
-        return device.gatt.connect();
+function myFunction() {
+    navigator.bluetooth.requestDevice({
+        filters: [{services: [0x6e400001]}]
     })
+        .then(function(device) {
+            return device.gatt.connect();
+        })
 
-    .then(function(server) {
-        return service.getCharacteristic(0x6e400001)
-    })
+        .then(function(server) {
+            return service.getCharacteristic(0x6e400001)
+        })
 
-    .then(function(service){
-        return service.getCharacteristic(0x6e40002)
-    })
-    .then(function(characteristic){
-        var data = 'HEI:';
-        return characteristic.writeValue(data);
-    })
-    .catch(function(error) {
-        console.error('COnnection failed!', error);
-    })
+        .then(function(service){
+            return service.getCharacteristic(0x6e40002)
+        })
+        .then(function(characteristic){
+            var data = 'HEI:';
+            return characteristic.writeValue(data);
+        })
+        .catch(function(error) {
+            console.error('Connection failed!', error);
+        });
+}
 </script>
