@@ -18,7 +18,7 @@ function myFunction() {
         })
 
         .then(function(server) {
-            return service.getCharacteristic(0x6e400001)
+            return service.getPrimaryService(0x6e400001)
         })
 
         .then(function(service){
