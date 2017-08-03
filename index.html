@@ -27,8 +27,10 @@ function connect() {
         })
         .then(function(characteristic){
             alert("Write")
-            var buffer = new ArrayBuffer(12);
-            //buffer[0]
+            var buffer = new ArrayBuffer(8);
+            var view   = new Uint8Array(buffer);
+            view[0] = 0x41;
+            view[1] = 0x3A;
             return characteristic.writeValue(buffer);
         })
         .catch(function(error) {
