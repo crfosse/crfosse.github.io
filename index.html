@@ -31,15 +31,6 @@ Hello World
                 alert("Server");
                 return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
             })
-
-            .then(function(service){
-                alert("Service");
-                return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
-            })
-            .then(function(characteristic){    
-                var uartMessage = [0x0100, 0x0041, 0x0A3];   
-                return characteristic.writeValue(create_uart_message_WebBLE(uartMessage));
-            })
             .catch(function(error) {
                 console.error('Connection failed!', error);
                 alert(error);
