@@ -1,28 +1,26 @@
 <body onload="myFunction()">
 
 Hello World
-<button id="btn">Press dis.</button>
+<button onclick="connect" id="btn">Press dis.</button>
 
 </body>
 
 <script>
 //Scanning for device with micro:bit - service
-function myFunction() {
-    alert("BLE")
-
+function connect() {
     navigator.bluetooth.requestDevice({
-        filters: [{services: [0x6e400001]}]
+        filters: [{services: [0x6e40001b5a3f393e0a9e50e24dcca9e]}]
     })
         .then(function(device) {
             return device.gatt.connect();
         })
 
         .then(function(server) {
-            return server.getPrimaryService(0x6e400001)
+            return server.getPrimaryService(0x0001)
         })
 
         .then(function(service){
-            return service.getCharacteristic(0x6e400002)
+            return service.getCharacteristic(0x0003)
         })
         .then(function(characteristic){
             var data = 'HEI:';
