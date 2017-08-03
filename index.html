@@ -17,22 +17,21 @@ function connect() {
         })
 
         .then(function(server) {
-            alert("Server")
+            alert("Server");
             return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
         })
 
         .then(function(service){
-            alert("Service")
+            alert("Service");
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
-            alert("Write")
             var data = new Uint8Array([0x41, 0xA3]);
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
-            alert(error)
+            alert(error);
         });
 }
 </script>
