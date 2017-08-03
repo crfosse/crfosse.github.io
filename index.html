@@ -29,7 +29,7 @@ function connect() {
             alert("Write")
             var buffer = new ArrayBuffer(12);
             //buffer[0]
-            return characteristic.writeValue(data);
+            return characteristic.writeValue(buffer);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
