@@ -6,33 +6,43 @@ Hello World
 </body>
 
 <script>
-//Scanning for device with micro:bit - service
-function connect() {
-    navigator.bluetooth.requestDevice({
-        filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}]
-    })
-        .then(function(device) {
-            alert("Connecting...")
-            return device.gatt.connect();
-        })
+    function create_uart_message_WebBLE(events) {
+        var arrayLength = events.length;
+        var buffer = new ArrayBuffer(arrayLength*2);
+        var dataView = new DataView(buffer);
+        var uint8View = new Uint8Array(buffer);
+        for (var i = 0; i < arrayLength; i++) {
+            dataView.setUint16(i*2, events[i],  true) ;
+        }
+        return uint8View;
+    }
 
-        .then(function(server) {
-            alert("Server");
-            return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
-        })
 
-        .then(function(service){
-            alert("Service");
-            return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
+    function connect() {
+        navigator.bluetooth.requestDevice({
+            filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}]
         })
-        .then(function(characteristic){
-            var data = new Uint8Array([0x41, 0xA3]);
-            alert(characteristic.writeValue(data));
-            return null//characteristic.writeValue(data);
-        })
-        .catch(function(error) {
-            console.error('Connection failed!', error);
-            alert(error);
-        });
+            .then(function(device) {
+                alert("Connecting...")
+                return device.gatt.connect();
+            })
+
+            .then(function(server) {
+                alert("Server");
+                return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
+            })
+
+            .then(function(service){
+                alert("Service");
+                return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
+            })
+            .then(function(characteristic){    
+                var uartMessage = [0x0100, 0x0041, 0x0A3];   
+                return characteristic.writeValue(create_uart_message_WebBLE(uartMessage));
+            })
+            .catch(function(error) {
+                console.error('Connection failed!', error);
+                alert(error);
+            });
 }
 </script>
