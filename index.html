@@ -27,7 +27,7 @@ function connect() {
         })
         .then(function(characteristic){
             alert("Write")
-            var data = new Uint8Array([0xbb, 0x25, 0x05, 0x44]);
+            var data = new Uint8Array([0x41, 0xA3]);
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
