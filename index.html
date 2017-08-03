@@ -31,7 +31,7 @@ function connect() {
             var view   = new Uint8Array(buffer);
             view[0] = 0x41;
             view[1] = 0x3A;
-            return characteristic.writeValue(buffer);
+            return characteristic.writeValue(view);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
