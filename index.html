@@ -45,7 +45,7 @@ function connect() {
 
 function sendStuff() {
         var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
-        wrtieCharacteristic.writeValue(data);
+        return writeCharacteristic.writeValue(data);
 }
 
 </script>
