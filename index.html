@@ -2,12 +2,16 @@
 
 Hello World
 <button onclick="connect()" id="btn">Press dis.</button>
+<button onclick="sendStuff()" id="btn">Send stuff</button>
 
 
 </body>
 
 <script>
 //Scanning for device with micro:bit - service
+
+var writeCharacteristic; 
+
 function connect() {
     navigator.bluetooth.requestDevice({
         acceptAllDevices: true,
@@ -29,13 +33,18 @@ function connect() {
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
-            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A]);
+            writeCharacteristic = characteristic; 
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
             alert(error);
         });
+}
+
+function sendStuff() {
+        var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
+        wrtieCharacteristic.writeValue(data);
 }
 
 </script>
