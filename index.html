@@ -83,6 +83,13 @@ function str2ab(str) {
   for (var i=0, strLen=str.length; i<strLen; i++) {
     bufView[i] = str.charCodeAt(i);
   }
+
+  resultBox.innerHTML += '<br>Writing: ';
+            for(var i = 0; i < data.length; i++) {
+                resultBox.innerHTML += bufView[i];
+            }
+            resultBox.innerHTML += '<br>';
+
   return buf;
 }
 
