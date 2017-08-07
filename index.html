@@ -2,16 +2,7 @@
 
 Hello World
 <button onclick="connect()" id="btn">Press dis.</button>
-<form>
-    <input id="textBox" type="text" placeholder="Skriv noe spennende...">
-    <button type="submit" onclick="sendStuff()" id="btn">Send til micro:bit</button>
-</form>
-
-<div id="resultBox">
-
-
-
-</div>
+<button onclick="sendStuff()" id="btn">Send stuff</button>
 
 
 </body>
@@ -20,7 +11,6 @@ Hello World
 //Scanning for device with micro:bit - service
 
 var writeCharacteristic; 
-var resultBox = document.getElementById('resultBox');
 
 function connect() {
     navigator.bluetooth.requestDevice({
@@ -43,19 +33,18 @@ function connect() {
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
-
+            resultBox.innerHTML += '<br>Writing...'
             writeCharacteristic = characteristic; 
-            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A]);
+            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
-            resultBox.innerHTML += ('<br>' + alert(error));
+            resultBox.innerHTML += '<br>Error:  ' + alert(error);
         });
 }
 
 function sendStuff() {
-        var input = document.getElementById('textBox').value;
         var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
         return writeCharacteristic.writeValue(data);
 }
