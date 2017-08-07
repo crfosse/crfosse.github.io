@@ -43,7 +43,7 @@ function connect() {
         .then(function(characteristic){
             writeCharacteristic = characteristic; 
             var text = 'OK';
-            var data = toInt(text+':');
+            var data = new Uint8Array(toInt(text+':'));
             resultBox.innerHTML += '<br>Writing: ' + text;
 
             return characteristic.writeValue(data);
@@ -56,7 +56,7 @@ function connect() {
 
 function sendStuff() {
         var input = document.getElementById('textBox').value;
-        var data = toInt(input+':');
+        var data = new Uint8Array(toInt(input+':'));
 
         resultBox.innerHTML += '<br>Writing: ' + input;
         return writeCharacteristic.writeValue(data);
