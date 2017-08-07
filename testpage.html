@@ -1,6 +1,4 @@
 <body>
-
-Hello World
 <button onclick="connect()" id="btn">Press dis.</button>
 <form>
     <input id="textBox" type="text" placeholder="Skriv noe spennende...">
@@ -45,9 +43,7 @@ function connect() {
         .then(function(characteristic){
             writeCharacteristic = characteristic; 
             var text = 'OK';
-            var data = str2ab(text+':');
-            var dataStr = ab2str(data);
-
+            var data = toInt(text+':');
             resultBox.innerHTML += '<br>Writing: ' + text;
 
             return characteristic.writeValue(data);
@@ -60,33 +56,18 @@ function connect() {
 
 function sendStuff() {
         var input = document.getElementById('textBox').value;
-        var data = str2ab(input+':');
-        var dataStr = ab2str(data);
+        var data = toInt(input+':');
 
         resultBox.innerHTML += '<br>Writing: ' + input;
-        resultBox.innerHTML += '<br>Writing: ' + dataStr;
         return writeCharacteristic.writeValue(data);
 }
 
-function ab2str(buf) {
-  return String.fromCharCode.apply(null, new Uint16Array(buf));
-}
-
-function str2ab(str) {
-  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
-  var bufView = new Uint16Array(buf);
-  for (var i=0, strLen=str.length; i<strLen; i++) {
-    var charCode = str.charCodeAt(i);
-    bufView[i] = (+charCode).toString(16)
-  }
-
-  resultBox.innerHTML += '<br>Writing: ';
-            for(var i = 0; i < bufView.length; i++) {
-                resultBox.innerHTML += bufView[i];
-            }
-            resultBox.innerHTML += '<br>';
-
-  return buf;
+function toInt(str) {
+        var intArray = [];
+        for(var i = 0; i<str.length; i++) {
+            intArray.push(str.charCodeAt(i));
+        }
+        return intArray;
 }
 
 </script>
