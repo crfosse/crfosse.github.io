@@ -43,9 +43,13 @@ function connect() {
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
-
             writeCharacteristic = characteristic; 
-            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A]);
+            var text = 'OK';
+            var data = str2ab(text+':');
+            var dataStr = ab2str(data);
+
+            resultBox.innerHTML += '<br>Writing: ' + text;
+
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
@@ -56,8 +60,33 @@ function connect() {
 
 function sendStuff() {
         var input = document.getElementById('textBox').value;
-        var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
+        var data = str2ab(input+':');
+        var dataStr = ab2str(data);
+
+        resultBox.innerHTML += '<br>Writing: ' + input;
+        resultBox.innerHTML += '<br>Writing: ' + dataStr;
         return writeCharacteristic.writeValue(data);
+}
+
+function ab2str(buf) {
+  return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i<strLen; i++) {
+    var charCode = str.charCodeAt(i);
+    bufView[i] = (+charCode).toString(16)
+  }
+
+  resultBox.innerHTML += '<br>Writing: ';
+            for(var i = 0; i < bufView.length; i++) {
+                resultBox.innerHTML += bufView[i];
+            }
+            resultBox.innerHTML += '<br>';
+
+  return buf;
 }
 
 </script>
