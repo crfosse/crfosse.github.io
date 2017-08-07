@@ -44,7 +44,7 @@ function connect() {
         })
         .then(function(characteristic){
             writeCharacteristic = characteristic; 
-            var text = "OK!";
+            var text = "OK!:";
             var data = str2ab(text);
 
             resultBox.innerHTML += '<br>Writing: ' + text;
@@ -57,7 +57,7 @@ function connect() {
 }
 
 function sendStuff() {
-        var input = document.getElementById('textBox').value;
+        var input = document.getElementById('textBox').value + ':';
         var data = str2ab(input);
         var dataStr = ab2str(data);
 
