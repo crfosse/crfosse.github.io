@@ -45,7 +45,7 @@ function connect() {
         .then(function(characteristic){
             writeCharacteristic = characteristic; 
             var text = "OK!";
-            var data = [UInt8](text.utf8);
+            var data = str2ab(text);
 
             resultBox.innerHTML += '<br>Writing: ' + text;
             return characteristic.writeValue(data);
@@ -58,10 +58,23 @@ function connect() {
 
 function sendStuff() {
         var input = document.getElementById('textBox').value;
-        var data = [UInt8](input.utf8);
+        var data = str2ab(input);
         
         resultBox.innerHTML += '<br>Writing: ' + input;
         return writeCharacteristic.writeValue(data);
+}
+
+function ab2str(buf) {
+  return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i<strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
 }
 
 </script>
