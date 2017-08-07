@@ -4,6 +4,8 @@ Hello World
 <button onclick="connect()" id="btn">Press dis.</button>
 <button onclick="sendStuff()" id="btn">Send stuff</button>
 
+<div id="resultBox">
+</div>
 
 </body>
 
@@ -11,6 +13,7 @@ Hello World
 //Scanning for device with micro:bit - service
 
 var writeCharacteristic; 
+var resultBox = document.getElementById('resultBox');
 
 function connect() {
     navigator.bluetooth.requestDevice({
