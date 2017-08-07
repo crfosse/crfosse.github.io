@@ -2,7 +2,16 @@
 
 Hello World
 <button onclick="connect()" id="btn">Press dis.</button>
-<button onclick="sendStuff()" id="btn">Send stuff</button>
+<form>
+    <input id="textBox" type="text" placeholder="Skriv noe spennende...">
+    <button type="submit" onclick="sendStuff()" id="btn">Send til micro:bit</button>
+</form>
+
+<div id="resultBox">
+
+
+
+</div>
 
 
 </body>
@@ -11,6 +20,7 @@ Hello World
 //Scanning for device with micro:bit - service
 
 var writeCharacteristic; 
+var resultBox = document.getElementById('resultBox');
 
 function connect() {
     navigator.bluetooth.requestDevice({
@@ -19,32 +29,38 @@ function connect() {
     
     })
         .then(function(device) {
-            alert("Connecting...")
+            resultBox.innerHTML += '<br>Connecting...'
             return device.gatt.connect();
         })
 
         .then(function(server) {
-            alert("Server");
+            resultBox.innerHTML += '<br>Server...'
             return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
         })
 
         .then(function(service){
-            alert("Service");
+            resultBox.innerHTML += '<br>Service...'
             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
         })
         .then(function(characteristic){
             writeCharacteristic = characteristic; 
-            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
+            var text = "OK!";
+            var data = [UInt8](text.utf8);
+
+            resultBox.innerHTML += '<br>Writing: ' + text;
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
             console.error('Connection failed!', error);
-            alert(error);
+            resultBox.innerHTML += ('<br>' + alert(error));
         });
 }
 
 function sendStuff() {
-        var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
+        var input = document.getElementById('textBox').value;
+        var data = [UInt8](input.utf8);
+        
+        resultBox.innerHTML += '<br>Writing: ' + input;
         return writeCharacteristic.writeValue(data);
 }
 
