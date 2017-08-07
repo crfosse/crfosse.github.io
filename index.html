@@ -49,7 +49,7 @@ function connect() {
             var dataStr = ab2str(data);
 
             resultBox.innerHTML += '<br>Writing: ' + text;
-            resultBox.innerHTML += '<br>Writing: ' + dataStr;
+            resultBox.innerHTML += '<br>Writing: ' + data;
             return characteristic.writeValue(data);
         })
         .catch(function(error) {
