@@ -1,0 +1,62 @@
+<body>
+    <button onclick="connect()" id="btn">Press dis.</button>
+    <button onclick="sendStuff()" id="btn">Send stuff</button>
+
+    <div id="resultBox">
+    </div>
+
+</body>
+
+<script>
+    //Scanning for device with micro:bit - service
+
+    var writeCharacteristic; 
+    var resultBox = document.getElementById('resultBox');
+
+    function connect() {
+        navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']
+        
+        })
+            .then(function(device) {
+                resultBox.innerHTML += '<br>Connecting...'
+                return device.gatt.connect();
+            })
+
+            .then(function(server) {
+                resultBox.innerHTML += '<br>Server...'
+                return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e')
+            })
+
+            .then(function(service){
+                resultBox.innerHTML += '<br>Service...'
+                return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e')
+            })
+            .then(function(characteristic){
+                resultBox.innerHTML += '<br>Writing...'
+                writeCharacteristic = characteristic; 
+                var str = "OK:";
+                var data = new Uint8Array(toInt(str));
+                return characteristic.writeValue(data);
+            })
+            .catch(function(error) {
+                console.error('Connection failed!', error);
+                resultBox.innerHTML += '<br>Error:  ' + alert(error);
+            });
+    }
+
+    function sendStuff() {
+            var data = new Uint8Array([0x42, 0x42, 0x43, 0x3A])
+            return writeCharacteristic.writeValue(data);
+    }
+
+    function toInt(str) {
+        var intArray = [];
+        for(var i = 0; i<str.length; i++) {
+            intArray.push(str.charCodeAt(i));
+        }
+        return intArray;
+    }
+
+</script>
