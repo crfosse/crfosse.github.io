@@ -34,5 +34,22 @@
         options: {}
     });
 
+    function addData(chart, label, data) {
+        chart.data.labels.push(label);
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(data);
+        });
+        chart.update();
+    }
+
+    var i = 45;
+
+    while(1) {
+        i+=5;
+        addData(ctx, "My First dataset", i)
+        
+        await sleep(2000);
+    }
+
 
 </script>
