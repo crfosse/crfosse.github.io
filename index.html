@@ -1,7 +1,7 @@
 <body>
 
 
-<canvas id="testChart" onclick="updateChart(chart)"> 
+<canvas id="testChart" onclick="updateChart()"> 
 
 
 
@@ -42,14 +42,14 @@
         chart.update();
     }
 
-    function updateChart(chartId) {
+    function updateChart() {
 
         var data = chart.data.datasets.data;
 
         var i = data[data.length-1]+=5;
         
 
-        addData(chartId, label, i);        
+        addData(chart, label, i);        
     }
 
 </script>
