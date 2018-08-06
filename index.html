@@ -49,17 +49,16 @@
     async function updateChart() {
 
         var i = 45;
-
-        while(1) {
-            i+=5;
-            addData(chart, "My First dataset", i);
-            console.log('In loop.');
-
-            await sleep(2000);
-        }
+           
+        i+=5;
+        addData(chart, "My First dataset", i);
+        console.log('In loop.');
+         await sleep(2000);
+        
     }
 
-    updateChart();
-
+    while(1) {
+        updateChart();
+    }
 
 </script>
