@@ -1,7 +1,7 @@
 <body>
 
 
-<canvas id="testChart"> 
+<canvas id="testChart" onclick="updateChart(chart)"> 
 
 
 
@@ -34,7 +34,7 @@
         options: {}
     });
 
-    function addData(chart, label, data) {
+    function addData(chartId, label, data) {
         chart.data.labels.push(label);
         chart.data.datasets.forEach((dataset) => {
             dataset.data.push(data);
@@ -42,23 +42,14 @@
         chart.update();
     }
 
-    /*function sleep(ms) {
-       return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    function updateChart(chartId) {
 
-    async function updateChart() {
+        var data = chart.data.datasets.data;
 
-        var i = 45;
-           
-        i+=5;
-        addData(chart, "My First dataset", i);
-        console.log('In loop.');
-        await sleep(2000);
+        var i = data[data.length-1]+=5;
         
-    }
 
-    while(1) {
-        updateChart();
-    }*/
+        addData(chartId, label, i);        
+    }
 
 </script>
