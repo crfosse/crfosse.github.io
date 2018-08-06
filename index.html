@@ -1,8 +1,38 @@
 <body>
 
 
-<iframe width="600" height="300" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQHYbv9ArvIHybDNoe1oAmm30k10TDkcPX9HZvewPt4zrsysijivKiYkQT4oMJeWy2G_80D48d--hpJ/pubchart?oid=175038237&amp;format=interactive"></iframe>
+<canvas id="testChart"> 
 
+
+
+</canvas>
 
 
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script>
+
+    var ctx = document.getElementById('testChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: "My First dataset",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+
+</script>
