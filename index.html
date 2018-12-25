@@ -2,27 +2,4 @@
 
 </body>
 
-<script>
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var yyyy = today.getFullYear();
-
-    var today_msec = Date.parse(today);
-
-    if(mm == 12 && dd > 24) {
-        next_yyyy = yyyy+1;
-        var christmas_msec = Date.parse(next_yyyy+'-12'+'-24');
-    } 
-    else if(mm == 12 && dd < 24) {
-        var christmas_msec = Date.parse(yyyy+'-12'+'-24');
-    }
-
-    var msec_to_christmas = christmas_msec-today_msec;
-    var days_to_christmas = Math.round(msec_to_christmas/86400000)
-
-    console.log(msec_to_christmas);   
-    console.log(days_to_christmas);
-
-</script>
+<script src="mixed.js"></script>
