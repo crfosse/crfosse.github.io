@@ -1,0 +1,24 @@
+{
+  "name": "crfosse.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "box_producer.js",
+  "dependencies": {
+    "chart.js": "^2.7.3",
+    "matter-js": "^0.14.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crfosse/crfosse.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crfosse/crfosse.github.io/issues"
+  },
+  "homepage": "https://github.com/crfosse/crfosse.github.io#readme"
+}
