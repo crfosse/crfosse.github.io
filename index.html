@@ -11,11 +11,11 @@
 
     var today_msec = Date.parse(today);
 
-    if(mm == 12 && day > 24) {
+    if(mm == 12 && dd > 24) {
         next_yyyy = yyyy+1;
         var christmas_msec = Date.parse(next_yyyy+'-12'+'-24');
     } 
-    else if(mm == 12 && day < 24) {
+    else if(mm == 12 && dd < 24) {
         var christmas_msec = Date.parse(yyyy+'-12'+'-24');
     }
 
