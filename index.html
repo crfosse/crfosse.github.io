@@ -10,7 +10,13 @@
     var yyyy = today.getFullYear();
 
     var today_msec = Date.parse(today);
-    var christmas_msec = Date.parse(yyyy+'-12'+'-24');
+
+    if(mm == 12 && day > 24) {
+        var christmas_msec = Date.parse((yyyy+1)+'-12'+'-24');
+    } 
+    else if(mm == 12 && day < 24) {
+        var christmas_msec = Date.parse((yyyy+1)+'-12'+'-24');
+    }
 
     var msec_to_christmas = christmas_msec-today_msec;
     var days_to_christmas = Math.round(msec_to_christmas/86400000)
