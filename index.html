@@ -1,55 +1,19 @@
 <body>
 
-
-<canvas id="testChart" onclick="updateChart()"> 
-
-
-
-</canvas>
-
-
 </body>
-
-<script src="node_modules\chart.js\dist\Chart.js"></script>>
 
 <script>
 
-    var ctx = document.getElementById('testChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
+    var today = new Date();
+    var dd = today.getDay();
+    var mm = today.getMonth();
+    var yyyy = today.getFullYear();
 
-        // The data for our dataset
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-                label: "My First dataset",
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
-            }]
-        },
+    var today_msec = Date.parse(today);
+    var christmas_msec = Date.parse(yyyy+'12'+'24');
 
-        // Configuration options go here
-        options: {}
-    });
+    var msec_to_christmas = christmas_msec-today_msec;
 
-    function addData(chartId, label, data) {
-        chart.data.labels.push(label);
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.push(data);
-        });
-        chart.update();
-    }
-
-    function updateChart() {
-
-        var data = chart.data.datasets.data;
-
-        var i = data[data.length-1]+=5;
-        
-
-        addData(chart, label, i);        
-    }
+    log(msec_to_christmas);   
 
 </script>
